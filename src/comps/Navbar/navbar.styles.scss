@@ -1,0 +1,75 @@
+#navbar {
+    position: relative;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    margin: 0 auto;
+    width: 1110px;
+    height: 100px;
+
+    #navlinks {
+        align-items: center;
+        height: 100px;
+    }
+
+    #logo {
+        position: relative;
+        float: left;
+        margin-right: 50px;
+        height: 20px;
+    }
+
+    ul {
+        list-style: none;
+        display: flex;
+        color: gray;
+        height: 100px;
+
+        li {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            margin-right: 25px;
+            border-bottom: 4px solid transparent;
+            cursor: pointer;
+
+            &:hover {
+                border-bottom: 4px solid hsl(26, 100%, 55%);
+            }
+        }
+    }
+
+    #cart-and-avatar {
+        height: 100px;
+        position: relative;
+        float: right;
+        display: flex;
+        align-items: center;
+
+        #cart-icon {
+            height: 20px;
+            margin-right: 40px;
+        }
+
+        .cart-counter {
+            display: none;
+            position: absolute;
+            top: 0;
+            transform: translateX(12px);
+            background-color: hsl(26, 100%, 55%);
+            height: 20px;
+            width: 20px;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        #avatar-logo {
+            height: 50px;
+        }
+    }
+
+}
