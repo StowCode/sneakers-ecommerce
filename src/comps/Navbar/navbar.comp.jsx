@@ -5,7 +5,7 @@ import Logo from '../../images/logo.svg';
 import CartIcon from '../../images/icon-cart.svg';
 import AvatarImage from '../../images/image-avatar.png';
 
-export const Navbar = (props) => {
+export const Navbar = (props, ref) => {
 
     return(
         <div id='navbar'>
