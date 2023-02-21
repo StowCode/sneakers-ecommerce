@@ -5,6 +5,7 @@
         "name": "Fall Limited Edition Sneakers",
         "price": 250,
         "sale": true,
+        "sale_price": 125,
         "sale_value": 50, 
         "description": "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.",
         "images": {

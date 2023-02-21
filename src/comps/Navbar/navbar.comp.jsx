@@ -12,7 +12,7 @@ export const Navbar = (props) => {
 const cartCounter = document.getElementsByClassName('cart-counter');
 
 useEffect(() => {
-    console.log(props.cartCounter)
+    /* console.log(props.cartCounter) */
 }, /* Dependency to be checked on after component mounts*/ [props.cartCounter])
 
     return(
