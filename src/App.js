@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { Navbar } from './comps/Navbar/navbar.comp';
+import { CartWindow } from './comps/CartWindow/cart-window.component';
 import { ProductPage } from './comps/Product Page/product.comp';
 
 import './App.css';
@@ -22,6 +23,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <CartWindow />
 
       <Navbar 
         cartCounter={cartCounter}

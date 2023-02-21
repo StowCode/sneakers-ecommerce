@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import '../Navbar/navbar.styles.scss';
 
 // Images
@@ -5,7 +7,13 @@ import Logo from '../../images/logo.svg';
 import CartIcon from '../../images/icon-cart.svg';
 import AvatarImage from '../../images/image-avatar.png';
 
-export const Navbar = (props, ref) => {
+export const Navbar = (props) => {
+
+const cartCounter = document.getElementsByClassName('cart-counter');
+
+useEffect(() => {
+    console.log(props.cartCounter)
+}, /* Dependency to be checked on after component mounts*/ [props.cartCounter])
 
     return(
         <div id='navbar'>
