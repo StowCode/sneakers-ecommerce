@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import { Navbar } from './comps/Navbar/navbar.comp';
-import { CartWindow } from './comps/CartWindow/cart-window.component';
 import { ProductPage } from './comps/Product Page/product.comp';
 
 import './App.css';
@@ -12,36 +11,52 @@ import data from '../src/product-info.json';
 const App = () => {
   const [cartCounter, setCartCounter] = useState(0);
   const [quantity, setQuantity] = useState(0);
+  
   const productInfo = data.database.product;
-  const [cartArray, setCartArray] = useState([
+/*   const [cartArray, setCartArray] = useState([
+    {
+      placeholder: 'Your cart is empty.'
+    },
     {
       item: {
-        placeholder: 'Your cart is empty.',
-        image: productInfo.images.p1,
-        name: productInfo.name,
-        sale_price: productInfo.sale_price,
-        quantity: '3'
+        inCart: false, // switch this to see product in cart
+
       }
     }
-  ])
+  ]) */
 
-  
+  const [cartArray, setCartArray] = useState({ 
+    cart: {
+        placeholder: 'Your cart is empty.',
+        
+        item: {
+          inCart: false,
+          image: productInfo.images.p1,
+          name: productInfo.name,
+          sale_price: productInfo.sale_price,
+          quantity: '3'
+        }
+      }
+    }
+  )
+
+
   return (
     <div className="App">
-      <CartWindow 
-        cartArray={cartArray}
-      />
+      
 
       <Navbar 
         cartCounter={cartCounter}
         setCartCounter={setCartCounter}
-/*         cartBadge={cartBadge} */
+        cartArray={cartArray}
       />
       <ProductPage 
         setCartCounter={setCartCounter}
         data={data}
         quantity={quantity}
         setQuantity={setQuantity}
+        cartArray={cartArray}
+        setCartArray={setCartArray}
       />
 
     </div>

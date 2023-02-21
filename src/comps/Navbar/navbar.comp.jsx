@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 
 import '../Navbar/navbar.styles.scss';
+import { CartWindow } from '../CartWindow/cart-window.component';
 
 // Images
 import Logo from '../../images/logo.svg';
@@ -8,12 +9,11 @@ import CartIcon from '../../images/icon-cart.svg';
 import AvatarImage from '../../images/image-avatar.png';
 
 export const Navbar = (props) => {
+    const [cartState, setCartState] = useState(false);
 
-const cartCounter = document.getElementsByClassName('cart-counter');
-
-useEffect(() => {
-    /* console.log(props.cartCounter) */
-}, /* Dependency to be checked on after component mounts*/ [props.cartCounter])
+    const openCart = () => {
+        cartState ? setCartState(false) : setCartState(true)
+    }
 
     return(
         <div id='navbar'>
@@ -28,12 +28,23 @@ useEffect(() => {
             
             <div id='cart-and-avatar'>
             <div className='cart-container'>
-                <img src={CartIcon} id='cart-icon' alt='cart icon'/>
-                <div className='cart-counter'>{props.cartCounter}</div>
+                <img onClick={openCart} src={CartIcon} id='cart-icon' alt='cart icon'/>
+                
+                { props.cartCounter > 0 ? <div className='cart-counter'>{props.cartCounter}</div>: null}   
+
             </div>
 
             <img src={AvatarImage} id='avatar-logo' alt='avatar'/>
             </div>
+
+            {
+                cartState ? 
+                    <CartWindow 
+                        cartArray={props.cartArray} // Prop drilling?
+                    />
+                : null
+            }
+
 
         </div>
     )

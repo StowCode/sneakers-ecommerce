@@ -4,7 +4,10 @@ import '../CartWindow/cart-window.styles.scss';
 import trashIcon from '../../images/icon-delete.svg';
 
 export const CartWindow = (props) => {
-    const cart = props.cartArray[0].item;
+    const cart = props.cartArray.cart.item;
+    const placeholder = props.cartArray.cart.placeholder;
+
+    console.log(cart.name)
 
     return(
     <div className='cart-window'>
@@ -13,8 +16,11 @@ export const CartWindow = (props) => {
         </div>
 
         <div className='main-cart-window'>
-{/*             <h4>{cart.placeholder}</h4> */}
-
+            
+            { !cart.inCart ? <h4>{placeholder}</h4> : 
+            
+            <div>
+                {/* This will be replaced by <CartInfo /> */}
             <div className='cart-item-info'> {/* Need to map through array to populate the cart */}
                 <img className='cart-image-thumbnail' src={cart.image} />
                 
@@ -22,15 +28,18 @@ export const CartWindow = (props) => {
                     <p className='cart-item-name'>{cart.name}</p>
                     
                     <div className='pricing-flex'>
-                        <p>{`$${cart.sale_price.toFixed(2)} x 3`}</p>
-                        <p className='product-total'>${(cart.sale_price * cart.quantity).toFixed(2)}</p>
+                        <p>{`$${cart.sale_price} x 3`}</p>
+                        <p className='product-total'>${(cart.sale_price * cart.quantity)}</p>
                     </div>
                 </div>
                 
                 <img src={trashIcon} className='trash-icon'/>
             </div>
-            
+
             <button className='checkout-button'>Checkout</button>
+            </div>
+            }
+
         </div>
         
     </div>

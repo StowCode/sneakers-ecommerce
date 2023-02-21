@@ -39,22 +39,24 @@ export const ProductPage = (props) => {
     const addToCart = () => {
         props.setCartCounter(prevCartCounter => prevCartCounter + props.quantity);
         props.setQuantity(0);
+        // Temporary for MVP
+/*         props.setCartArray(prevCartArray => ({
+          ...prevCartArray,
+          cart: {
+            item: {
+              inCart: true,
+            }
+          },
+       }));
+       console.log(props.cartArray); */
     }
 
-    /*   const cartBadge = () => {
-        const element = cartNotificationRef.current;
-        if (cartCounter === 0) {
-        element.style.display = 'none';
-        } else {
-        element.style.display ='block';
-        }
-    } */
 
     return(
         <div className='product_page'>
 
         <div className='product_images'>
-          <img className='main-image' src={currentImage} alt=''/>
+          <img onClick={() => {console.log('Open Lightbox')}} className='main-image' src={currentImage} alt=''/>
 
           <div className='thumbnails-container'>
             <img className='image-thumbnails' onClick={selectPicture} id='image1' src={image1} alt=''/>
