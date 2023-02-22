@@ -13,24 +13,12 @@ const App = () => {
   const [quantity, setQuantity] = useState(0);
   
   const productInfo = data.database.product;
-/*   const [cartArray, setCartArray] = useState([
-    {
-      placeholder: 'Your cart is empty.'
-    },
-    {
-      item: {
-        inCart: false, // switch this to see product in cart
-
-      }
-    }
-  ]) */
-
   const [cartArray, setCartArray] = useState({ 
     cart: {
         placeholder: 'Your cart is empty.',
         
         item: {
-          inCart: false,
+          inCart: true,
           image: productInfo.images.p1,
           name: productInfo.name,
           sale_price: productInfo.sale_price,

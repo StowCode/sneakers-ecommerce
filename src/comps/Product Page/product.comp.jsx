@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Lightbox } from './../Lightbox/lightbox.component';
 
 // styles
 import '../Product Page/product.styles.scss';
@@ -14,6 +15,7 @@ import image4 from '../../images/image-product-4.jpg';
 
 export const ProductPage = (props) => {
     const [currentImage, setCurrentImage] = useState(image1);
+    const [lightboxIsOpen, setLightboxIsOpen] = useState(false);
 
     const info = props.data.database.product;
 
@@ -55,8 +57,19 @@ export const ProductPage = (props) => {
     return(
         <div className='product_page'>
 
+        <Lightbox 
+          isOpen={lightboxIsOpen}
+          setIsOpen={setLightboxIsOpen}
+          currentImage={currentImage}
+          image1={image1}
+          image2={image2}
+          image3={image3}
+          image4={image4}
+          selectPicture={selectPicture}
+        />
+
         <div className='product_images'>
-          <img onClick={() => {console.log('Open Lightbox')}} className='main-image' src={currentImage} alt=''/>
+          <img onClick={() => {setLightboxIsOpen(true)}} className='main-image' src={currentImage} alt=''/>
 
           <div className='thumbnails-container'>
             <img className='image-thumbnails' onClick={selectPicture} id='image1' src={image1} alt=''/>
@@ -72,7 +85,12 @@ export const ProductPage = (props) => {
           <p className='description'>{info.description}</p>
 
           <div className='price-box'>
-            <h4>${info.price * (info.sale_value / 100)}</h4>
+            <h4>${info.sale_price.toFixed(2)}</h4>
+{/*             <h4>${() => {
+              const multiplier = info.sale_value / 100;
+              const salePrice = info.price * multiplier;
+              return salePrice;
+              }}</h4> */}
             <p className='sale-value'>{info.sale_value}%</p>
           </div>
 
@@ -92,6 +110,10 @@ export const ProductPage = (props) => {
             </button>
 
           </div>
+
+        </div>
+
+        <div className='lightbox'>
 
         </div>
 
