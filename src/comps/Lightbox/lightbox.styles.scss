@@ -30,3 +30,10 @@
     }
 
 }
+
+
+@media screen and (max-width: 500px) {
+    .lightbox-container {
+        display: none;
+    }
+}
