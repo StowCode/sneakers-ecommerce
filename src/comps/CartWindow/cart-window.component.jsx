@@ -4,10 +4,37 @@ import '../CartWindow/cart-window.styles.scss';
 import trashIcon from '../../images/icon-delete.svg';
 
 export const CartWindow = (props) => {
-    const cart = props.cartArray.cart.item;
-    const placeholder = props.cartArray.cart.placeholder;
+    const cart = props.cartObject.cart.item;
+    const placeholder = props.cartObject.cart.placeholder;
 
-    console.log(cart.name)
+/*     const clearItem = () => {
+        props.setCartObject(prevCartObject => ({
+            ...prevCartObject,
+            cart: {
+              item : {
+                inCart: false,
+                image: '',
+                name: '',
+                sale_price: '',
+                quantity: ''
+              }
+            },
+         })); */
+
+    const clearItem = () => {
+        props.setCartObject(prevCartObject => ({
+            ...prevCartObject,
+            cart: {
+                placeholder: 'Your cart is empty.',
+                item: {
+                    inCart: false,
+                }
+            }
+        }))
+        props.setCartCounter(0)
+        console.log('delete')
+    }
+    
 
     return(
     <div className='cart-window'>
@@ -28,15 +55,21 @@ export const CartWindow = (props) => {
                     <p className='cart-item-name'>{cart.name}</p>
                     
                     <div className='pricing-flex'>
-                        <p>{`$${cart.sale_price} x 3`}</p>
+                        <p>{`$${cart.sale_price} x ${cart.quantity}`}</p>
                         <p className='product-total'>${(cart.sale_price * cart.quantity)}</p>
                     </div>
                 </div>
                 
-                <img src={trashIcon} className='trash-icon'/>
+                <img src={trashIcon} onClick={clearItem} className='trash-icon'/>
             </div>
 
-            <button className='checkout-button'>Checkout</button>
+            <button 
+                className='checkout-button'
+                onClick={() => {
+                    alert('This demo site does not include a checkout page... yet!  Thanks for visiting')
+                }}
+                
+            >Checkout</button>
             </div>
             }
 

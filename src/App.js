@@ -9,20 +9,20 @@ import './App.css';
 import data from '../src/product-info.json';
 
 const App = () => {
-  const [cartCounter, setCartCounter] = useState(0);
   const [quantity, setQuantity] = useState(0);
+  const [cartCounter, setCartCounter] = useState(quantity);
   
   const productInfo = data.database.product;
-  const [cartArray, setCartArray] = useState({ 
+  const [cartObject, setCartObject] = useState({ 
     cart: {
         placeholder: 'Your cart is empty.',
         
         item: {
-          inCart: true,
-          image: productInfo.images.p1,
-          name: productInfo.name,
-          sale_price: productInfo.sale_price,
-          quantity: '3'
+          inCart: false,
+          image: '',
+          name: '',
+          sale_price: '',
+          quantity: ''
         }
       }
     }
@@ -36,15 +36,18 @@ const App = () => {
       <Navbar 
         cartCounter={cartCounter}
         setCartCounter={setCartCounter}
-        cartArray={cartArray}
+        cartObject={cartObject}
+        setCartObject={setCartObject}
       />
-      <ProductPage 
+      
+      <ProductPage
+        cartCounter={cartCounter}
         setCartCounter={setCartCounter}
         data={data}
         quantity={quantity}
         setQuantity={setQuantity}
-        cartArray={cartArray}
-        setCartArray={setCartArray}
+        cartObject={cartObject}
+        setCartObject={setCartObject}
       />
 
     </div>

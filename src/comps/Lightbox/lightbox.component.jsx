@@ -14,8 +14,6 @@ export const Lightbox = (props) => {
     // Not being used.  State for carousel.
     const [photoIndex, setPhotoIndex] = useState(0);
 
-    console.log(props.isOpen);
-
     return (
       <div>
 

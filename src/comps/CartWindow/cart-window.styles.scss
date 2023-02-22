@@ -36,7 +36,6 @@
         }
 
         .cart-item-info {
-            width: 95%;
             display: flex;
             align-items: center;
             justify-content: space-evenly;
@@ -55,6 +54,10 @@
             .trash-icon {
                 width: 14px;
                 height: 16px;
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
 
             .pricing-flex {

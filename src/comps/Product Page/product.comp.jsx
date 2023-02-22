@@ -8,16 +8,13 @@ import '../Product Page/product.styles.scss';
 import cartIcon from '../../images/icon-cart-white.svg';
 import minusButton from '../../images/icon-minus.svg';
 import plusButton from '../../images/icon-plus.svg';
-import image1 from '../../images/image-product-1.jpg';
-import image2 from '../../images/image-product-2.jpg';
-import image3 from '../../images/image-product-3.jpg';
-import image4 from '../../images/image-product-4.jpg';
 
 export const ProductPage = (props) => {
-    const [currentImage, setCurrentImage] = useState(image1);
+    const info = props.data.database.product;
+    const [currentImage, setCurrentImage] = useState(info.images.p1);
     const [lightboxIsOpen, setLightboxIsOpen] = useState(false);
 
-    const info = props.data.database.product;
+    
 
     const selectPicture = (event) => {
         // sets image source for carousel
@@ -39,20 +36,27 @@ export const ProductPage = (props) => {
     };
 
     const addToCart = () => {
+      if (props.quantity > 0) {
         props.setCartCounter(prevCartCounter => prevCartCounter + props.quantity);
         props.setQuantity(0);
+        
         // Temporary for MVP
-/*         props.setCartArray(prevCartArray => ({
-          ...prevCartArray,
+        props.setCartObject(prevCartObject => ({
+          ...prevCartObject,
           cart: {
-            item: {
+            item : {
               inCart: true,
+              image: info.images.p1,
+              name: info.name,
+              sale_price: info.sale_price,
+              quantity: props.quantity + props.cartCounter
             }
           },
        }));
-       console.log(props.cartArray); */
+      } else {
+        alert('Choose a quantity greater than 0.')
+      }
     }
-
 
     return(
         <div className='product_page'>
@@ -61,10 +65,10 @@ export const ProductPage = (props) => {
           isOpen={lightboxIsOpen}
           setIsOpen={setLightboxIsOpen}
           currentImage={currentImage}
-          image1={image1}
-          image2={image2}
-          image3={image3}
-          image4={image4}
+          image1={info.images.p1}
+          image2={info.images.p2}
+          image3={info.images.p3}
+          image4={info.images.p4}
           selectPicture={selectPicture}
         />
 
@@ -72,10 +76,10 @@ export const ProductPage = (props) => {
           <img onClick={() => {setLightboxIsOpen(true)}} className='main-image' src={currentImage} alt=''/>
 
           <div className='thumbnails-container'>
-            <img className='image-thumbnails' onClick={selectPicture} id='image1' src={image1} alt=''/>
-            <img className='image-thumbnails' onClick={selectPicture} id='image2' src={image2} alt=''/>
-            <img className='image-thumbnails' onClick={selectPicture} id='image3' src={image3} alt=''/>
-            <img className='image-thumbnails' onClick={selectPicture} id='image4' src={image4} alt=''/>
+            <img className='image-thumbnails' onClick={selectPicture} id='image1' src={info.images.p1} alt=''/>
+            <img className='image-thumbnails' onClick={selectPicture} id='image2' src={info.images.p2} alt=''/>
+            <img className='image-thumbnails' onClick={selectPicture} id='image3' src={info.images.p3} alt=''/>
+            <img className='image-thumbnails' onClick={selectPicture} id='image4' src={info.images.p4} alt=''/>
           </div>
         </div>
 
@@ -110,10 +114,6 @@ export const ProductPage = (props) => {
             </button>
 
           </div>
-
-        </div>
-
-        <div className='lightbox'>
 
         </div>
 

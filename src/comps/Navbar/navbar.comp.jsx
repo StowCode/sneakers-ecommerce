@@ -40,7 +40,9 @@ export const Navbar = (props) => {
             {
                 cartState ? 
                     <CartWindow 
-                        cartArray={props.cartArray} // Prop drilling?
+                        cartObject={props.cartObject} // Prop drilling?
+                        setCartObject={props.setCartObject}
+                        setCartCounter={props.setCartCounter}
                     />
                 : null
             }
