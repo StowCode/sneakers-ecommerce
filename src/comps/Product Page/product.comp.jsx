@@ -11,16 +11,34 @@ import plusButton from '../../images/icon-plus.svg';
 
 export const ProductPage = (props) => {
     const info = props.data.database.product;
-    const [currentImage, setCurrentImage] = useState(info.images.p1);
+
+    const images = [
+      info.images.p1,
+      info.images.p2,
+      info.images.p3,
+      info.images.p4
+    ]
+
+    const [photoIndex, setPhotoIndex] = useState(0);
+    const [currentImage, setCurrentImage] = useState(images[photoIndex]);
     const [lightboxIsOpen, setLightboxIsOpen] = useState(false);
 
-    
 
     const selectPicture = (event) => {
         // sets image source for carousel
         setCurrentImage(event.target.src)
         // applies CSS class
         // 
+    }
+
+    const increasePhotoIndex = () => {
+      setPhotoIndex((photoIndex + 1) % images.length)
+      setCurrentImage(images[photoIndex])
+    }
+  
+    const decreasePhotoIndex = () => {
+      setPhotoIndex((photoIndex + images.length - 1) % images.length)
+      setCurrentImage(images[photoIndex])
     }
 
     const handleIncrement = () => {
@@ -39,6 +57,7 @@ export const ProductPage = (props) => {
       if (props.quantity > 0) {
         props.setCartCounter(prevCartCounter => prevCartCounter + props.quantity);
         props.setQuantity(0);
+        props.vibrate();
         
         // Temporary for MVP
         props.setCartObject(prevCartObject => ({
@@ -65,21 +84,23 @@ export const ProductPage = (props) => {
           isOpen={lightboxIsOpen}
           setIsOpen={setLightboxIsOpen}
           currentImage={currentImage}
-          image1={info.images.p1}
-          image2={info.images.p2}
-          image3={info.images.p3}
-          image4={info.images.p4}
+          setCurrentImage={setCurrentImage}
           selectPicture={selectPicture}
+          photoIndex={photoIndex}
+          setPhotoIndex={setPhotoIndex}
+          images={images}
+          increasePhotoIndex={increasePhotoIndex}
+          decreasePhotoIndex={decreasePhotoIndex}
         />
 
         <div className='product_images'>
           <img onClick={() => {setLightboxIsOpen(true)}} className='main-image' src={currentImage} alt=''/>
 
           <div className='thumbnails-container'>
-            <img className='image-thumbnails' onClick={selectPicture} id='image1' src={info.images.p1} alt=''/>
-            <img className='image-thumbnails' onClick={selectPicture} id='image2' src={info.images.p2} alt=''/>
-            <img className='image-thumbnails' onClick={selectPicture} id='image3' src={info.images.p3} alt=''/>
-            <img className='image-thumbnails' onClick={selectPicture} id='image4' src={info.images.p4} alt=''/>
+            <img className='image-thumbnails' onClick={selectPicture} id='image1' src={images[0]} alt=''/>
+            <img className='image-thumbnails' onClick={selectPicture} id='image2' src={images[1]} alt=''/>
+            <img className='image-thumbnails' onClick={selectPicture} id='image3' src={images[2]} alt=''/>
+            <img className='image-thumbnails' onClick={selectPicture} id='image4' src={images[3]} alt=''/>
           </div>
         </div>
 
@@ -90,11 +111,6 @@ export const ProductPage = (props) => {
 
           <div className='price-box'>
             <h4>${info.sale_price.toFixed(2)}</h4>
-{/*             <h4>${() => {
-              const multiplier = info.sale_value / 100;
-              const salePrice = info.price * multiplier;
-              return salePrice;
-              }}</h4> */}
             <p className='sale-value'>{info.sale_value}%</p>
           </div>
 
