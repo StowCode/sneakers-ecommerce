@@ -28,17 +28,8 @@ const App = () => {
     }
   )
 
-  const vibrate = () => {
-     if(!("vibrate" in navigator)){
-         alert("Vibrate not supported!");
-         return;
-       }
-       navigator.vibrate(2000);
-  }
-
   return (
     <div className="App">
-      
 
       <Navbar 
         cartCounter={cartCounter}
@@ -55,7 +46,6 @@ const App = () => {
         setQuantity={setQuantity}
         cartObject={cartObject}
         setCartObject={setCartObject}
-        vibrate={vibrate}
       />
 
     </div>

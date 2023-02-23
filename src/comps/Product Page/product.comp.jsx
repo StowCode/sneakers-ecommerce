@@ -8,6 +8,8 @@ import '../Product Page/product.styles.scss';
 import cartIcon from '../../images/icon-cart-white.svg';
 import minusButton from '../../images/icon-minus.svg';
 import plusButton from '../../images/icon-plus.svg';
+import previousIcon from '../../images/icon-previous.svg';
+import nextIcon from '../../images/icon-next.svg';
 
 export const ProductPage = (props) => {
     const info = props.data.database.product;
@@ -57,7 +59,6 @@ export const ProductPage = (props) => {
       if (props.quantity > 0) {
         props.setCartCounter(prevCartCounter => prevCartCounter + props.quantity);
         props.setQuantity(0);
-        props.vibrate();
         
         // Temporary for MVP
         props.setCartObject(prevCartObject => ({
@@ -94,7 +95,15 @@ export const ProductPage = (props) => {
         />
 
         <div className='product_images'>
-          <img onClick={() => {setLightboxIsOpen(true)}} className='main-image' src={currentImage} alt=''/>
+
+          <div className='mobile-arrows-container'>
+            <img onClick={decreasePhotoIndex} className='mobile-gallery-arrows' src={previousIcon} />
+            <img onClick={increasePhotoIndex} className='mobile-gallery-arrows' src={nextIcon} />
+          </div>
+
+          <div className='main-image-container'>
+            <img onClick={() => {setLightboxIsOpen(true)}} className='main-image' src={currentImage} alt=''/>
+          </div>
 
           <div className='thumbnails-container'>
             <img className='image-thumbnails' onClick={selectPicture} id='image1' src={images[0]} alt=''/>
